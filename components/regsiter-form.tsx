@@ -29,8 +29,7 @@ export function ResgisterForm({
   })
 
   function onSubmit(values: z.infer<typeof resgisterSchema>) {
-    console.log(values)
-    
+   console.log("Form submitted with values:", values);
   }
 
 

@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
  
 import * as z from "zod"
 import { Textarea } from "@/components/ui/textarea"
+import { register } from "@/actions/resgister"
 
 
 const ContactForm = () => {
@@ -31,8 +32,9 @@ const ContactForm = () => {
       })
 
       function onSubmit(values: z.infer<typeof contactFormSchema>) {
-       
-        console.log(values)
+       console.log(values);
+        register();
+        
       }
 
   return (
