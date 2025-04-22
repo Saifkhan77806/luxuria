@@ -1,21 +1,48 @@
+'use client';
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import * as z  from "zod"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { resgisterSchema } from "@/schemas"
 
 export function ResgisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+
+  const form = useForm<z.infer<typeof resgisterSchema>>({
+    resolver: zodResolver(resgisterSchema),
+    defaultValues: {
+      email: "",
+      name: "",
+      phone: "",
+      country: "",
+      password: "",
+      cpassword: "",
+    },
+  })
+
+  function onSubmit(values: z.infer<typeof resgisterSchema>) {
+    console.log(values)
+    
+  }
+
+
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0 bg-transparent relative text-white">
       <div className="absolute top-52 left-0 w-44 h-20 bg-purple-600 opacity-30 blur-2xl"></div>
       <div className="absolute bottom-0 right-0 w-44 h-20 bg-purple-600 opacity-30 blur-2xl"></div>
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold  text-purple-600">Welcome !</h1>
@@ -23,54 +50,84 @@ export function ResgisterForm({
                   Register to your Luxuria Inc account
                 </p>
               </div>
-              <div className="grid gap-3">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="saif khan"
-                  required
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="saifkhan@luxuria.com"
-                  required
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="phone">Phone</Label>
-                <Input
-                  id="phone"
-                  type="number"
-                  placeholder="+91 1234567890"
-                  required
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="country">Contry</Label>
-                <Input
-                  id="country"
-                  type="text"
-                  placeholder="India"
-                  required
-                />
-              </div>
-              <div className="grid gap-3">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
-                <Input id="password" placeholder="***********" type="password" required />
-              </div>
-              <div className="grid gap-3">
-                <div className="flex items-center">
-                  <Label htmlFor="cpassword">Confirm Password</Label>
-                </div>
-                <Input id="cpassword" placeholder="***********" type="password" required />
-              </div>
+              <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+              <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Email"  {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+              <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone</FormLabel>
+              <FormControl>
+                <Input placeholder="phone" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+              <FormField
+          control={form.control}
+          name="country"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Country</FormLabel>
+              <FormControl>
+                <Input placeholder="country" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+              <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input placeholder="password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+              <FormField
+          control={form.control}
+          name="cpassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirm password</FormLabel>
+              <FormControl>
+                <Input placeholder="Confirm password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
               <Button type="submit" className="w-full  bg-purple-600 hover:bg-purple-700">
                 Login
               </Button>
@@ -99,6 +156,7 @@ export function ResgisterForm({
               </div>
             </div>
           </form>
+          </Form>
           <div className="bg-muted relative hidden md:block">
             <img
               src="/placeholder.svg"
