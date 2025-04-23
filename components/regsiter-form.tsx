@@ -3,13 +3,13 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import * as z  from "zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { resgisterSchema } from "@/schemas"
+import { register } from "@/actions/resgister";
 
 export function ResgisterForm({
   className,
@@ -30,6 +30,11 @@ export function ResgisterForm({
 
   function onSubmit(values: z.infer<typeof resgisterSchema>) {
    console.log("Form submitted with values:", values);
+   register(values).then((res)=>{
+    console.log(res)
+   }).catch((err)=>{
+    console.error("Error during registration:", err);
+   });
   }
 
 
