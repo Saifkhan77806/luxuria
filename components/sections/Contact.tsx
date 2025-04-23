@@ -10,6 +10,8 @@ import { useEffect } from "react";
 
 const Contact = () => {
 
+  
+
    const controls = useAnimation(); // For framer motion
     const [ref, inView] = useInView({ threshold: 0.5, triggerOnce: true }); // Observe element
   

@@ -5,14 +5,25 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model User{
-  id        Int     @id @default(autoincrement())
-  name      String
-  email     String  @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum SubscriptionType {
+  NONE
+  FREE
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+model User {
+  id           Int              @id @default(autoincrement())
+  name         String
+  email        String           @unique
+  phone        String
+  country      String
+  password     String
+  subscription SubscriptionType @default(NONE)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
 }
