@@ -1,15 +1,39 @@
-import { ResgisterForm } from "@/components/regsiter-form";
+// app/register/page.tsx
+'use client';
 
+import { useSignIn, useSignUp } from '@clerk/nextjs';
 
-export default function LoginPage() {
+export default function RegisterPage() {
+  const { isLoaded, signUp } = useSignUp();
+  const SignIn = useSignIn();
+
+  const handleSocialRegister = async (provider: 'oauth_google' | 'oauth_linkedin') => {
+    if (!isLoaded) return;
+
+    await signUp.authenticateWithRedirect({
+      strategy: "oauth_google",
+      redirectUrl: '/auth/callback',
+      redirectUrlComplete: '/dashboard',
+    });
+  };
+
   return (
-    <div className="bg-black relative flex min-h-svh flex-col items-center justify-center p-6 md:p-10 ">
-      <div className="absolute top-20 left-0 w-40 h-20 bg-purple-600 opacity-30 blur-2xl"></div>
-      <div className="absolute bottom-40 right-0 w-40 h-20 bg-purple-600 opacity-30 blur-2xl"></div>
-      <div className="absolute bottom-20 left-0 w-40 h-20 bg-purple-600 opacity-30 blur-2xl"></div>
-      <div className="w-full max-w-sm md:max-w-3xl">
-        <ResgisterForm />
-      </div>
+    <div className="max-w-md mx-auto py-10 px-4 text-center">
+      <h1 className="text-2xl mb-6">Register with Social</h1>
+
+      <button
+        onClick={() => handleSocialRegister('oauth_google')}
+        className="bg-red-500 text-white px-4 py-2 w-full mb-4"
+      >
+        Register with Google
+      </button>
+
+      <button
+        onClick={() => handleSocialRegister('oauth_linkedin')}
+        className="bg-blue-700 text-white px-4 py-2 w-full"
+      >
+        Register with LinkedIn
+      </button>
     </div>
-  )
+  );
 }

@@ -33,6 +33,7 @@ const ContactForm = () => {
       function onSubmit(values: z.infer<typeof contactFormSchema>) {
        console.log(values);
        
+       
       }
 
   return (

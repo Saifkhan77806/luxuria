@@ -12,7 +12,6 @@ import Who from "@/components/sections/Who";
 export default function Home() {
   return (
     <div className="flex relative flex-col min-h-screen">
-      
       <Navbar />
       <Hero />
       <Who />
