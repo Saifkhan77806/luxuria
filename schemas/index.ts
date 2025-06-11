@@ -7,14 +7,9 @@ export const contactFormSchema = zod.object({
     });
 
 
-export const resgisterSchema = zod.object({
-
-    name: zod.string().min(2, 'Name must be at least 2 characters long'),
-    email: zod.string().email('Invalid email'), 
-    phone: zod.string().min(10, 'Phone number must be at least 10 characters long'),
-    country: zod.string().min(2, 'Country must be at least 2 characters long'),
-    password: zod.string().min(8, 'Password must be at least 8 characters long'),
-    cpassword: zod.string().min(8, 'Confirm Password must be at least 8 characters long'),
-}).refine((data) => data.password === data.cpassword, {
-    message: "Passwords don't match",
+export const registerFormSchema = zod.object({
+firstName: zod.string().min(2, 'First name must be at least 2 characters long'),
+lastName: zod.string().min(2, 'Last name must be at least 2 characters long'),
+email: zod.string().email('Invalid email'),
+password: zod.string().min(8, 'Password must be at least 8 characters long'),
 })
