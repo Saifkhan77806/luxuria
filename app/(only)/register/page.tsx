@@ -1,14 +1,14 @@
-// app/register/page.tsx
+
 'use client';
 
+import { ResgisterForm } from '@/components/regsiter-form';
 import { useSignUp } from '@clerk/nextjs';
+import { GalleryVerticalEnd } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function RegisterPage() {
   const { isLoaded, signUp } = useSignUp();
-  // const SignIn = useSignIn();
-
-  // ...existing code...
+ 
   const handleSocialRegister = async (provider: 'oauth_google' | 'oauth_linkedin') => {
   if (!isLoaded) return;
 
@@ -20,30 +20,30 @@ export default function RegisterPage() {
     });
   } catch (error) {
     console.error('Error during social registration:', error);
-    // Handle error (e.g., show a toast notification)
     toast.error('Social registration failed. Please try again.');
   }
 };
 
 
+{/* google sign up button  */}
+      // <button
+      //   onClick={() => handleSocialRegister('oauth_google')}
+      //   className="bg-red-500 text-white px-4 py-2 w-full mb-4"
+      // >
+      //   Register with Google
+      // </button>
 
   return (
-    <div className="max-w-md mx-auto py-10 px-4 text-center">
-      <h1 className="text-2xl mb-6">Register with Social</h1>
-
-      <button
-        onClick={() => handleSocialRegister('oauth_google')}
-        className="bg-red-500 text-white px-4 py-2 w-full mb-4"
-      >
-        Register with Google
-      </button>
-
-      <button
-        onClick={() => handleSocialRegister('oauth_linkedin')}
-        className="bg-blue-700 text-white px-4 py-2 w-full"
-      >
-        Register with LinkedIn
-      </button>
+    <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
+      <div className="flex w-full max-w-sm flex-col gap-6">
+        <a href="#" className="flex items-center gap-2 self-center font-medium">
+          <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+            <GalleryVerticalEnd className="size-4" />
+          </div>
+          Luxuria AI.
+        </a>
+        <ResgisterForm />
+      </div>
     </div>
-  );
+  )
 }
