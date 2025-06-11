@@ -3,7 +3,7 @@ import {motion} from "framer-motion"
 
 
 interface TitlebtnProps {
-    text: String
+    text: string
 }
 
 export const Titlebtn = ({text}: TitlebtnProps) => {

@@ -12,7 +12,7 @@ interface cardProps {
     service?: boolean;
 }
 
-const Card = ({children, cardTitle, cardText, href, service}: cardProps) => {
+const Card = ({children, cardTitle, cardText, service}: cardProps) => {
 
   const controls = useAnimation(); // For framer motion
   const [ref, inView] = useInView({ threshold: 0.5, triggerOnce: true }); // Observe element

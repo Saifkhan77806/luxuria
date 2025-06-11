@@ -1,8 +1,6 @@
 'use client'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import Image from 'next/image'
 import React from 'react'
-import Logo from '@/newLogo.png'
 import { Navlink } from '@/components/blocks/links/Navlink'
 import { motion } from 'framer-motion'
 import { PiStarFourThin } from 'react-icons/pi'

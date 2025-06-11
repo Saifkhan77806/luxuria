@@ -1,3 +1,4 @@
+'use client';
 import Navbar from "@/components/Navbar";
 import Benefits from "@/components/sections/Benefits";
 import Contact from "@/components/sections/Contact";
@@ -22,7 +23,6 @@ export default function Home() {
       <Testimonails />
       <Contact />
       <Footer />
-      
     </div>
       );
 }

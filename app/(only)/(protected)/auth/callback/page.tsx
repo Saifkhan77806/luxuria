@@ -4,6 +4,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from '@clerk/nextjs';
+import { toast } from 'sonner';
 
 export default function AuthCallback() {
   const { isLoaded, session } = useSession();
@@ -20,10 +21,16 @@ export default function AuthCallback() {
       console.log('Provider:', provider);
       console.log('Profile URL:', profileUrl);
       console.log('Email:', email);
+      console.log('Session:', session);
 
       // OPTIONAL: save to your DB
 
       router.push('/dashboard');
+    }else{
+      console.log('Session not loaded or user not authenticated');
+      toast("User is not authenticated or user is already registered")
+      // Optionally redirect to a sign-in page or show an error
+      router.push('/register');
     }
   }, [isLoaded, session, router]);
 

@@ -9,7 +9,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { resgisterSchema } from "@/schemas"
-import { register } from "@/actions/resgister";
 
 export function ResgisterForm({
   className,
@@ -30,11 +29,6 @@ export function ResgisterForm({
 
   function onSubmit(values: z.infer<typeof resgisterSchema>) {
    console.log("Form submitted with values:", values);
-   register(values).then((res)=>{
-    console.log(res)
-   }).catch((err)=>{
-    console.error("Error during registration:", err);
-   });
   }
 
 

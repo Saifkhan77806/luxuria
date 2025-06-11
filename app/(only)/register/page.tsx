@@ -1,21 +1,31 @@
 // app/register/page.tsx
 'use client';
 
-import { useSignIn, useSignUp } from '@clerk/nextjs';
+import { useSignUp } from '@clerk/nextjs';
+import { toast } from 'sonner';
 
 export default function RegisterPage() {
   const { isLoaded, signUp } = useSignUp();
-  const SignIn = useSignIn();
+  // const SignIn = useSignIn();
 
+  // ...existing code...
   const handleSocialRegister = async (provider: 'oauth_google' | 'oauth_linkedin') => {
-    if (!isLoaded) return;
+  if (!isLoaded) return;
 
+  try {
     await signUp.authenticateWithRedirect({
-      strategy: "oauth_google",
+      strategy: provider,
       redirectUrl: '/auth/callback',
       redirectUrlComplete: '/dashboard',
     });
-  };
+  } catch (error) {
+    console.error('Error during social registration:', error);
+    // Handle error (e.g., show a toast notification)
+    toast.error('Social registration failed. Please try again.');
+  }
+};
+
+
 
   return (
     <div className="max-w-md mx-auto py-10 px-4 text-center">

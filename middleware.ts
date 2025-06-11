@@ -1,17 +1,15 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
-import { NextResponse } from 'next/server';
 
-export default clerkMiddleware();
+const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const secretKey = process.env.CLERK_SECRET_KEY;
+
+if (!publishableKey || !secretKey) {
+  console.warn('Clerk keys missing - skipping Clerk middleware');
+}
+
+export default publishableKey && secretKey ? clerkMiddleware() : () => {};
 
 export const config = {
-
-  publicRoutes: ['/', '/register', '/sign-up'],
-  afterAuth(auth: any, req : Request) {
-    if (!auth?.userId  && !auth?.isPublicRoute) {
-      return NextResponse.redirect(new URL('/sign-in', req.url));
-    }
-  },
-
   matcher: [
     // Skip Next.js internals and all static files, unless found in search params
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',

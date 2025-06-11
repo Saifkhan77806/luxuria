@@ -4,7 +4,7 @@ import { Titlebtn } from "../blocks/buttons/Titlebtn"
 import { LuPhone } from "react-icons/lu"
 import { FaRegAddressCard } from "react-icons/fa"
 import ContactForm from "../blocks/contacts/ContactForm";
-import { useAnimation, motion, easeIn } from "framer-motion";
+import { useAnimation, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 

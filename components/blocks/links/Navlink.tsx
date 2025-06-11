@@ -1,8 +1,8 @@
 import Link from "next/link"
 
 interface navLinkProp {
-    text: String;
-    id: String;
+    text: string;
+    id: string;
     isSideBar?: boolean;
 }
 

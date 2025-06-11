@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { motion, useScroll, useAnimation } from "framer-motion"
 import { Arrbtn } from "@/components/blocks/buttons/Arrbtn"
 import { Navlink } from "@/components/blocks/links/Navlink"
-import {ResNavbar} from "./blocks/responsive/ResNavbar"
+// import {ResNavbar} from "./blocks/responsive/ResNavbar"
 import Image from "next/image"
 import Logo from "@/newLogo.png"
 
@@ -39,7 +39,7 @@ const Navbar = () => {
   return (
     <>
     <div className="hidden max-md:block">
-    <ResNavbar />
+    {/* <ResNavbar /> */}
     </div>
     <motion.div
       animate={controls}

@@ -6,14 +6,14 @@ import { useInView } from "react-intersection-observer";
 interface TesCardProps {
 
     name: string;
-    image: string;
+    image?: string;
     text: string;
     works: string;
     at: string;
     }
 
 
-const TesCard = ({name, image, text, works, at}: TesCardProps) => {
+const TesCard = ({name, text, works, at}: TesCardProps) => {
 
     const controls = useAnimation(); // For framer motion
     const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true }); // Observe element
@@ -33,7 +33,7 @@ const TesCard = ({name, image, text, works, at}: TesCardProps) => {
 
         <div>
             <p className="text-gray-400 text-sm font-bold">
-                "{text}"
+                {text}
             </p>
         </div>
         <div className="flex mt-3 gap-2">

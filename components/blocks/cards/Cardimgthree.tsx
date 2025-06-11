@@ -4,15 +4,7 @@ import {
   motion
 } from 'framer-motion'
 import Browserline from '@/components/blocks/Browserline'
-const data = [
-  { day: 'Day 1', value: 30 },
-  { day: 'Day 2', value: 50 },
-  { day: 'Day 3', value: 40 },
-  { day: 'Day 4', value: 60 },
-  { day: 'Day 5', value: 55 },
-  { day: 'Day 6', value: 45 },
-  { day: 'Day 7', value: 70 },
-]
+
 const Cardimgthree = () => {
   
   return (

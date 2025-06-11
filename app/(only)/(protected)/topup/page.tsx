@@ -1,6 +1,5 @@
 'use client'
 import PlansCard from "@/components/blocks/plans/PlansCard"
-import { useState } from "react"
 import { PiStack, PiStackPlus } from "react-icons/pi"
 import { BiCustomize } from "react-icons/bi";
 import { RxStack } from "react-icons/rx"
@@ -9,7 +8,8 @@ import { RxStack } from "react-icons/rx"
 const page = () => {
 
   
-      const [isLeft, setIsLeft] = useState(true)
+      // const [isLeft, setIsLeft] = useState(true)
+      const isLeft = true // This can be toggled based on user preference or other logic
   
 
   return (
