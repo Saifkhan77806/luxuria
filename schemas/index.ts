@@ -13,3 +13,9 @@ lastName: zod.string().min(2, 'Last name must be at least 2 characters long'),
 email: zod.string().email('Invalid email'),
 password: zod.string().min(8, 'Password must be at least 8 characters long'),
 })
+
+export const loginFormSchema = zod.object({
+email: zod.string().email('Invalid email'),
+password: zod.string().min(8, 'Password must be at least 8 characters long'),
+})
+

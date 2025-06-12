@@ -10,6 +10,7 @@ import {
 import { ProfileForm } from "@/components/blocks/froms/customRegisterFormClerk"
 import { toast } from "sonner"
 import { useSignUp } from "@clerk/nextjs"
+import Link from "next/link"
 
 export function ResgisterForm({
   className,
@@ -65,10 +66,13 @@ export function ResgisterForm({
                 <ProfileForm />
               </div>
               <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
-                  Sign in
-                </a>
+                Already have an account?{" "}
+                <Link
+                  href="/login"
+                  className="hover:underline"
+                >
+                  Login
+                </Link>
               </div>
             </div>
         </CardContent>
