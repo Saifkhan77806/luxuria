@@ -72,9 +72,8 @@ export function ProfileForm() {
       await setActive({ session: result.createdSessionId });
       router.push("/dashboard");
     }
-  } catch (e: any) {
-    console.error("Error verifying code:", e?.errors?.[0] ?? e);
-    const message = e?.errors?.[0]?.message ?? "Verification failed.";
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : "Verification failed.";
     toast.error(message);
   }
 };
@@ -167,7 +166,7 @@ export function ProfileForm() {
           />
           <Button
             onClick={handleVerification}
-            className="bg-green-600 text-white px-4 py-2 rounded w-full"
+            className="text-white px-4 py-2 rounded w-full"
           >
             Verify & Continue
           </Button> </>)
