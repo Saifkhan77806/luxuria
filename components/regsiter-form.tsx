@@ -28,7 +28,7 @@ export function ResgisterForm({
       redirectUrlComplete: '/dashboard',
     });
   } catch (e: unknown) {
-    toast.error( e instanceof Error ? e.message : "Unknown error");
+    toast.error( e instanceof Error ? e.message : "Please try again later.");
   }
 };
 
