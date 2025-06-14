@@ -6,9 +6,11 @@ import { useRouter } from 'next/navigation';
 import { useSession } from '@clerk/nextjs';
 import { toast } from 'sonner';
 
+
 export default function AuthCallback() {
   const { isLoaded, session } = useSession();
   const router = useRouter();
+
 
   useEffect(() => {
     console.log('Session:', session);
@@ -25,7 +27,21 @@ export default function AuthCallback() {
 
       // OPTIONAL: save to your DB
 
-      router.push('/dashboard');
+      fetch('/api/create-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, profileUrl }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          console.log('User created');
+          router.push('/dashboard')
+        }})
+      
+
     }else{
       console.log('Session not loaded or user not authenticated');
       toast("User is not authenticated or user is already registered")

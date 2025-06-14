@@ -26,7 +26,7 @@ export function ResgisterForm({
     await signUp.authenticateWithRedirect({
       strategy: provider,
       redirectUrl: '/auth/callback',
-      redirectUrlComplete: '/dashboard',
+      redirectUrlComplete: '/auth/callback',
     });
   } catch (e: unknown) {
     toast.error( e instanceof Error ? e.message : "Please try again later.");

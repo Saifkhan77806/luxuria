@@ -9,7 +9,7 @@ export default function DashboardPage() {
   if (!isLoaded) return <div>Loading...</div>;
 
   const profileUrl = user?.externalAccounts?.[0]?.imageUrl;
-  console.log("profile url", user);
+  // console.log("profile url", user);
   const email = user?.emailAddresses?.[0]?.emailAddress;
 
   return (
@@ -21,7 +21,7 @@ export default function DashboardPage() {
           Profile URL: <a href={profileUrl} className="text-blue-500 underline">{profileUrl}</a>
         </p>
       )}
-      <SignOutButton redirectUrl='/register'>
+      <SignOutButton redirectUrl='/login'>
         <button className="bg-gray-500 text-white px-4 py-2 mt-4">Sign Out</button>
       </SignOutButton>
     </div>
