@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     });
 
     if (existingUser) {
-      return NextResponse.json({ success: true, message: 'User already exists' });
+      return NextResponse.json({ success: false, message: 'User already exists' });
     }
 
     await db.user.create({

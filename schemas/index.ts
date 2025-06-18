@@ -11,7 +11,6 @@ export const registerFormSchema = zod.object({
 firstName: zod.string().min(2, 'First name must be at least 2 characters long'),
 lastName: zod.string().min(2, 'Last name must be at least 2 characters long'),
 email: zod.string().email('Invalid email'),
-profileImage: zod.string().url('Invalid image URL'),
 password: zod.string().min(8, 'Password must be at least 8 characters long'),
 })
 

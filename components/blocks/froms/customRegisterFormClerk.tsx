@@ -7,7 +7,7 @@ import { registerFormSchema } from "@/schemas"
 import { useSignUp } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
@@ -20,6 +20,7 @@ export function ProfileForm() {
     const router = useRouter();
     const [code, setCode] = useState<string>("");
     const [pendingVerification, setPendingVerification] = useState(false);
+    const [isPending, startTransition] = useTransition()
 
 
   // 1. Define your form.
@@ -37,6 +38,9 @@ export function ProfileForm() {
   async function onSubmit(values: z.infer<typeof registerFormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+
+    console.log("Submitting form with values:", values);
+
     const { firstName, lastName, email, password } = values;
     if(!signUp) return;
 
@@ -70,7 +74,25 @@ export function ProfileForm() {
 
     if (result.status === "complete") {
       await setActive({ session: result.createdSessionId });
-      router.push("/dashboard");
+
+      startTransition(() => {
+         fetch('/api/create-user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: result.emailAddress, profileUrl: "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18yeUljRDQ2R0tVSWd0Rjh2aHpjZ2drMFZGZHAiLCJyaWQiOiJ1c2VyXzJ5UUp2SmVBUUJMTnVHdE1GZTdzbnJHS29EWiJ9?width=64" }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            console.log('User created');
+            router.push('/dashboard')
+          }})
+      })
+      
+      
+
     }
   } catch (e: unknown) {
     const message = e instanceof Error ? e.message : "Verification failed.";
@@ -151,7 +173,7 @@ export function ProfileForm() {
             />
 
 
-            <Button className="w-full cursor-pointer" type="submit">Submit</Button>
+            <Button className="w-full cursor-pointer" disabled={isPending} type="submit">Submit</Button>
         </form>
     </Form>
 
@@ -166,7 +188,8 @@ export function ProfileForm() {
           />
           <Button
             onClick={handleVerification}
-            className="text-white px-4 py-2 rounded w-full"
+            className="text-white px-4 py-2 rounded w-full" 
+            disabled={isPending} 
           >
             Verify & Continue
           </Button> </>)
