@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { loginFormSchema } from "@/schemas"
 import { useSignIn } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
+import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
@@ -99,6 +100,8 @@ export function CustomLoginFormClerk() {
               )
             }
           />
+
+          <Link href={"/forgot-password"}>Forgot Password</Link>
 
 
           <Button className="w-full cursor-pointer" type="submit">Submit</Button>
