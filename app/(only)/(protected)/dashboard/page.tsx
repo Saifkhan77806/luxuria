@@ -10,7 +10,7 @@ export default function DashboardPage() {
 
   const profileUrl = user?.externalAccounts?.[0]?.imageUrl;
   // console.log("profile url", user);
-  const email = user?.emailAddresses?.[0]?.emailAddress;
+  const email = user?.emailAddresses?.[0]?.emailAddress ;
 
   return (
     <div className="max-w-md mx-auto py-10 px-4 text-center">

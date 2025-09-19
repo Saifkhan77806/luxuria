@@ -20,24 +20,58 @@ enum SubscriptionStatus {
   ENTERPRISE
 }
 
+enum generationType {
+  NONE
+  IMGTEXT
+  TEXTTEXT
+  TEXTIMG
+}
+
 model User {
-  id                 String             @id @default(cuid())
-  email              String             @unique
-  username           String?  
-  profilePicture     String             @default("https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18yeUljRDQ2R0tVSWd0Rjh2aHpjZ2drMFZGZHAiLCJyaWQiOiJ1c2VyXzJ5UUp2SmVBUUJMTnVHdE1GZTdzbnJHS29EWiJ9?width=64")
-  subscriptionStatus SubscriptionStatus @default(NONE)
-  subscription       Subcription?
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime           @updatedAt
+  id             String       @id @default(cuid())
+  email          String       @unique
+  username       String?
+  profilePicture String       @default("https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18yeUljRDQ2R0tVSWd0Rjh2aHpjZ2drMFZGZHAiLCJyaWQiOiJ1c2VyXzJ5UUp2SmVBUUJMTnVHdE1GZTdzbnJHS29EWiJ9?width=64")
+  subscription   Subcription?
+  token          Token?
+  team           Teams?
+  generation     Generation[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
 model Subcription {
   id                 String             @id @default(cuid())
   userId             String             @unique
   subscriptionStatus SubscriptionStatus @default(NONE)
-  token              Int?
-  memberToken        Int?
   user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
+}
+
+model Token {
+  id          String @id @default(cuid())
+  token       Int    @default(0)
+  userToken   Int    @default(0)
+  memberToken Int    @default(0)
+  userId      String @unique
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Teams {
+  id     String @id @default(cuid())
+  name   String
+  email  String @unique
+  teamId String
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Generation {
+  id        String         @id @default(cuid())
+  type      generationType @default(NONE)
+  noOfImg   Int
+  createdAt DateTime       @default(now())
+  userId    String
+  user      User           @relation(fields: [userId], references: [id])
 }
